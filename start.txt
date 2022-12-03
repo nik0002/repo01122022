@@ -1,1 +1,2 @@
 this is file frome remote repo
+add new info
