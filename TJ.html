@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <title>Тестовое задание</title>
+</head>
+<body>
+	<b>S --></b><input type="text" id='txtS' size="40"/><br>
+    <b>A --></b><input type="text1" id='txtA' size="40"/><br>
+    <b>B --></b><input type="text2" id='txtB' size="40"/>
+    <div id="time"></div>
+	<input type="submit" name="submit" value="Провести эквивалентное преобразование" />
+	<p id="otvet"></p>
+	<script>
+        let mas = document.getElementsByName("submit")
+        mas[0].addEventListener("click", sendRequest);
+        function Vt(strUS, strUA, strUB) {
+			var possible = "abcdefghijklmnopqrstuvwxyz";
+            text = [];
+    		for (i=0; i < strUS.length; i++)
+                for (j=0; j < possible.length; j++)
+                    if(strUS[i] == possible[j]) text.push(strUS[i])
+            for (i=0; i < strUA.length; i++)
+                for (j=0; j < possible.length; j++)
+                    if(strUA[i] == possible[j]) text.push(strUA[i])
+            for (i=0; i < strUB.length; i++)
+                for (j=0; j < possible.length; j++)
+                    if(strUB[i] == possible[j]) text.push(strUB[i])                   
+            let uniqueText = text.filter((element, index) => {
+                return text.indexOf(element) === index;
+            });
+  			return uniqueText;
+		}
+        function Vn(strUS, strUA, strUB) {
+			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            text = [];
+    		for (i=0; i < strUS.length; i++)
+                for (j=0; j < possible.length; j++)
+                    if(strUS[i] == possible[j]) text.push(strUS[i])
+            for (i=0; i < strUA.length; i++)
+                for (j=0; j < possible.length; j++)
+                    if(strUA[i] == possible[j]) text.push(strUA[i])
+
+            for (i=0; i < strUB.length; i++)
+                for (j=0; j < possible.length; j++)
+                    if(strUB[i] == possible[j]) text.push(strUB[i])
+                    
+            let uniqueText = text.filter((element, index) => {
+                return text.indexOf(element) === index;
+            });
+  			return uniqueText;
+		}
+        function Pone(strUS, strUA) {
+            t = ''
+            var C = /A/gi;
+            S = strUS.split('|');
+            
+            for (i=0; i < S.length; i++)
+            {
+                t += S[i]
+                if(S[i] == 'A') {
+
+                    S[i].replace(strUA)
+                    t = '|' + S[i]
+                }
+            }
+            return t    
+		}
+
+        function Pond(strUS, strUA, strUB) {         
+            A = strUA.split('|');      
+            for (i=0; i < A.length; i++)
+                if(A[i] == 'B') strUA = strUA.replace(A[i], strUB)
+            
+            return strUA
+		}
+
+        function Pona(strUS, strUA) {         
+            S = strUS.split('|');      
+            for (i=0; i < S.length; i++)
+                if(S[i] == 'A') strUS = strUS.replace(S[i], strUA)
+            return strUS
+		}
+        
+		function sendRequest(event)
+		{
+			strUS = document.getElementById("txtS").value;
+            strUA = document.getElementById("txtA").value;
+            strUB = document.getElementById("txtB").value;
+            console.log('Vt', Vt(strUS, strUA, strUB));
+            console.log('Vn', Vn(strUS, strUA, strUB));
+            console.log(Pone(strUS, strUA));
+            console.log('A -->', Pond(strUS, strUA, strUB));
+            console.log('S -->', Pona(strUS, Pond(strUS, strUA, strUB)));
+            
+            
+		}
+	</script>
+</body>
+</html>
